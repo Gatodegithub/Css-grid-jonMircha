@@ -1,0 +1,335 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+a[href="#top"] {
+  margin: 1rem;
+  display: block;
+  font-size: 2rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 50vh;
+  text-align: center;
+}
+
+img {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.menu {
+  margin-bottom: 100vh;
+  font-size: 125%;
+}
+
+.menu li {
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 0 auto;
+  width: 80%;
+  height: 80vh;
+  background-color: #222;
+  border: medium solid #000;
+}
+
+.item {
+  padding: 1rem;
+  font-size: 1.25rem;
+  background-color: #666;
+  border: medium solid #999;
+}
+
+.sub-item {
+  background-color: #ddd;
+  border: medium solid #ccc;
+  padding: 1rem;
+}
+
+.grid-explicit {
+  display: grid;
+  /* Grid de 3c x 3r */
+  grid-template-columns: 2rem 20vh 30%;
+  grid-template-rows: 50% 100px 1fr;
+  /* Grid de 5c x 4r */
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(4, auto);
+
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(4, auto);
+
+  /* Grid de 4c x 5r */
+  grid-template-columns: 20% repeat(2, 30%) 20%;
+  grid-template-rows: repeat(5, auto);
+  column-gap: 4rem;
+  row-gap: 2rem;
+  /* gap: row column */
+  gap: 10px 0px;
+}
+
+.grid-explicit .item:nth-child(10) {
+  color: cyan;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row: 2 / 3;
+  grid-column: 3 / 5;
+  /* grid-area: row start / column start /  row end /column end  */
+  grid-area: 2 / 3 / 3 / 5;
+}
+
+.grid-explicit .item:nth-child(12) {
+  color: cyan;
+  /* abarca de la posicion en la que estoy, dos filas */
+  grid-row: span 2;
+  grid-column: span 3;
+}
+
+.grid-explicit .item:nth-child(15) {
+  color: cyan;
+  grid-row: 1 / span 2;
+  grid-column: 1 / span 2;
+}
+
+.grid-line-names {
+  display: grid;
+  /* Grid 3c x 3r */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: [linea-c1] 1fr [linea-c2] 1fr [linea-c3] 1fr [linea-c4];
+  grid-template-rows: [linea-r1] auto [linea-r2] auto [linea-r3] auto [linea-r4];
+}
+
+.grid-line-names .item:nth-child(3) {
+  color: cyan;
+  grid-row: linea-r3 / linea-r4;
+  grid-column: linea-c1 / linea-c4;
+}
+
+.grid-areas {
+  display: grid;
+  /* Grid 2c x 3r */
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: 100px repeat(2, 1fr) 60px;
+  grid-template-areas: 
+    "header header"
+    "content sidebar"
+    "content ."
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+/* GRID EXPLICITA ES CUANDO YO DEFINO MIS FILAS Y COLUMNAS QUE ESTOY ESPERANDO. */
+/* GRID IMPLICITA los items que sobran, tienen el valor de auto, aumentaran tamaño segun contenido */
+/* INLINE-GRID HACE QUE EL CONTENEDOR SEA UN GRID PERO INLINE, SE PUEDE ACOMODAR OTRO ELEMENTO AL LADO */
+/* INLINE-FLEX LO MISMO, HACE LA CAJA INLINE. */
+
+.grid-implicit {
+  /* Grid de 4c x 3r */
+  width: 40%;
+  display: inline-grid;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 200px);
+}
+
+.grid-flow {
+  display: grid;
+  /* Grid de 5c x 4r */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 150px);
+  grid-auto-flow: row;
+  grid-auto-rows: 100px;
+  /* Los items implicitos se acomodaran como columnas */
+  grid-auto-flow: column;
+  /* de 50px*/
+  grid-auto-columns: 50px;
+}
+
+.grid-flow-dense {
+  display: grid;
+  /* Grid de 5c x 4r */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 200px);
+  /* Para llenar los huecos vacios */
+  grid-auto-flow: row dense;
+}
+
+.grid-flow-dense .item:nth-child(9) {
+  color: cyan;
+  grid-row: span 3;
+  grid-column: span 3;
+}
+
+.grid-layers {
+  display: grid;
+  /* Grid de 4c x 4r */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.grid-layers .item:nth-child(1){
+  background-color: #DBEA33;
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+.grid-layers .item:nth-child(2){
+  background-color: #497af8;
+  grid-column: 3 / 5;
+  grid-row: 1 / 3;
+}
+
+.grid-layers .item:nth-child(3){
+  background-color: #90e971;
+  grid-column: 1 / 3;
+  grid-row: 3 / 5;
+}
+
+.grid-layers .item:nth-child(4){
+  background-color: #f0952a;
+  grid-column: 3 / 5;
+  grid-row: 3 / 5;
+}
+
+.grid-layers .item:nth-child(5){
+  background-color: #c92af0;
+  opacity: 0.75;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+}
+
+.grid-order {
+  display: grid;
+  /* Grid de 3c x 2r */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.grid-order .item:nth-child(1){
+  /* default es 0, valores negativos y positivos */
+  order: 1;
+}
+
+.grid-order .item:nth-child(3){
+  order: 2;
+}
+
+.grid-order .item:nth-child(5){
+  order: -1;
+}
+
+.grid-align {
+  display: grid;
+  /* Grid de 3c x 2r */
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 200px);
+  /* justify-item alinea mis elementos grid en el eje (x), su valor defecto es strech */
+  justify-items: center;
+  /* align-items alinea mis elementos grid en el eje vertical (y) */
+  align-items: center;
+}
+
+.grid-align .item:nth-child(4) {
+  justify-self: start;
+  align-self: start;
+}
+
+.grid-align-tracks {
+  display: grid;
+  /* Grid de 3c x 2r*/
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 200px);
+  /* Justify-content alinea los tracks de la grid en el eje horizontal (x) */
+  justify-content: center;
+  justify-content: space-evenly;
+
+  /* Align-content alinea los tracks de la grid en el eje vertical (y) */
+  align-content: space-evenly;
+}
+
+.grid-min-max {
+  display: grid;
+  /* Grid de 4c x ?r*/
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(100px, 200px));
+  grid-template-columns: repeat(4, minmax(min-content, 200px));
+  grid-template-columns: repeat(4, minmax(100px, min-content));
+  grid-template-columns: repeat(4, minmax(100px, max-content));
+  grid-template-columns: repeat(4, minmax(max-content, 200px));
+  grid-template-columns: repeat(4, minmax(min-content, max-content));
+}
+
+.grid-repeat {
+  display: grid;
+  /* La funcion repeat solo la puedo usar en grid template-column o rows */
+  grid-template-columns: repeat(1, 10% 20% 30% 40%);
+  grid-template-rows: repeat(2, 100px 200px);
+  /* grid auto flow es row por defecto */
+  /* grid auto rows le digo que las filas implicitas tienen 100px */
+  grid-auto-rows: 100px;
+}
+
+
+.grid-dynamics {
+  display: grid;
+  /* COMO EL AUTO FLOW DE GRID POR DEFECTO ES EN ROW (LOS ELEMENTOS IMPLICITOS SE IRAN COLOCANDO EN FILA), SOLO DEFINIRE COLUMNAS */
+  grid-template-columns: repeat(4, 100px);
+  /* auto-fill rellena toda la caja grid con tracks generados dinamicamente, en este caso con columnas de 100px */
+  grid-template-columns: repeat(auto-fill, 100px);
+  /* auto-fit ajusta la grid solo con los tracks existentes */
+  grid-template-columns: repeat(auto-fit, 100px);
+  /* RECUERDA QUE FILL TE LLENA LA GRILLA CON TRACKS, EN ESTE CASO DE 100PX */
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  /* NO TE LLENA LA GRILLA DE TRACKS */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+
+.grid-responsive {
+  display: grid;
+  /* ajustate a los elementos que tienes disponible */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+
+.grid-nested {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
